@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <style>
+
+/* Reset básico para evitar margens/paddings inesperados */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Corpo da página */
+body {
+    background-color: #000; /* Fundo preto */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #eee;
+}
+
+/* Container dos vídeos */
+#videos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Estilo dos iframes */
+iframe {
+    flex: 1 1 300px;
+    max-width: 350px;
+    height: 210px;
+    border: 3px solid #4f46e5;
+    background-color: #5b21b6;
+    box-shadow:
+        0 4px 15px rgba(79, 70, 229, 0.5),
+        0 0 10px rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: block; /* garantir que o iframe seja block */
+}
+
+/* Hover no iframe */
+iframe:hover {
+    transform: scale(1.07);
+    box-shadow:
+        0 8px 30px rgba(79, 70, 229, 0.7),
+        0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Botão links */
+a.button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4f46e5;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.5);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* Hover botão */
+a.button:hover {
+    background-color: #4338ca;
+    box-shadow: 0 8px 30px rgba(79, 70, 229, 0.7);
+}
+
+a.button:focus-visible {
+    outline: 3px solid #a5b4fc;
+    outline-offset: 3px;
+}
+
+/* P igual botão */
+p {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: orangered;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.5);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    margin: 0;
+    text-align: center;
+}
+
+/* Hover p */
+p:hover {
+    background-color: #4338ca;
+    box-shadow: 0 8px 30px rgba(79, 70, 229, 0.7);
+}
+
+/* Container de anúncios */
+#ads {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 120px;
+    height: 220px;
+    background-color: #fff;
+    color: #111;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-size: 20px;
+    font-weight: 600;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 9999;
+    user-select: none;
+}
+#btn {
+    padding: 12px 24px;
+    background-color: #4f46e5;         /* Azul vibrante */
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.5);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+    user-select: none;
+}
+
+#btn:hover {
+    background-color: #4338ca;         /* Azul mais escuro no hover */
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.7);
+    transform: scale(1.05);            /* Leve efeito de zoom */
+}
+
+#btn:active {
+    transform: scale(0.98);            /* Efeito de clique */
+    box-shadow: 0 3px 10px rgba(79, 70, 229, 0.4);
+}
+
+#btn:focus-visible {
+    outline: 3px solid #a5b4fc;        /* Acessibilidade para navegação via teclado */
+    outline-offset: 3px;
+}
+</style>
+        <!-- Meta tags essenciais -->
+<!-- Meta padrão -->
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+            <!-- Título da página -->
+            <title>Notícias de Vitória ES - Atualizações Reais e Confiáveis</title>
+
+            <!-- Descrição para motores de busca -->
+            <meta name="description" content="Confira as últimas notícias de Vitória, Espírito Santo. Informações atualizadas sobre segurança, política, saúde, economia, cultura e eventos da capital capixaba." />
+
+            <!-- Palavras-chave -->
+            <meta name="keywords" content="Vitória ES, notícias de Vitória, Espírito Santo, jornal Vitória, atualizações Vitória, notícias capixabas, segurança, política, saúde, cultura" />
+
+            <!-- Autor -->
+            <meta name="author" content="Portal Vitória Notícias" />
+
+            <!-- Open Graph (Facebook, LinkedIn, etc.) -->
+            <meta property="og:title" content="Notícias de Vitória ES - Atualizações Reais e Confiáveis" />
+            <meta property="og:description" content="Últimas notícias de Vitória (ES), com informações verificadas sobre os principais acontecimentos da cidade." />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="https://www.seusite.com/vitoria" />
+            <meta property="og:image" content="https://www.seusite.com/imagens/vitoria-capa.jpg" />
+
+            <!-- Twitter Cards -->
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" content="Notícias de Vitória ES - Atualizações Reais e Confiáveis" />
+            <meta name="twitter:description" content="Fique por dentro das principais notícias de Vitória, Espírito Santo. Atualizações em tempo real com fontes confiáveis." />
+            <meta name="twitter:image" content="https://www.seusite.com/imagens/vitoria-capa.jpg" />
+            <meta name="twitter:site" content="@VitoriaNoticias" />
+
+            <!-- SEO técnico -->
+            <meta name="robots" content="index, follow" />
+            <meta http-equiv="Content-Language" content="pt-BR" />
+
+
+
+    </head>
+    <body>
+        <div id="ads">
+            <a href="https://victorxx.github.io/airbnbrandom01/">COMECE NO AIRBNB</a>
+        </div>
+        <div id="videos">
+            
+        </div>
+        <button id="btn">carregar</button>
+        <script>
+            let links=[
+                "https://www.youtube.com/embed/eVB1cgrga2o",  
+                "https://www.youtube.com/embed/VInjGr0vR3c",  
+                "https://www.youtube.com/embed/L4YkGnKV6Hk",  
+                "https://www.youtube.com/embed/oDmhDGtFNdo",  
+                "https://www.youtube.com/embed/k5u9cID5vs4",  
+                "https://www.youtube.com/embed/SkkWgSpCX5Q",  
+                "https://www.youtube.com/embed/NbQDP90j4FA",  
+                "https://www.youtube.com/embed/NOs13VbKv8c",  
+                "https://www.youtube.com/embed/kCtiV81lKMs",  
+                "https://www.youtube.com/embed/rMlV_xmmBKs",  
+                "https://www.youtube.com/embed/7vhBf9Ubp7M",  
+                "https://www.youtube.com/embed/NRJxXHLavMY",  
+                "https://www.youtube.com/embed/Sqdfuws19iw",  
+                "https://www.youtube.com/embed/XQMlG0oM4-E",  
+                "https://www.youtube.com/embed/YJKkQD-TlrU",  
+                "https://www.youtube.com/embed/GnR2m0Dfm94",  
+                "https://www.youtube.com/embed/c5x4RdTCPls",  
+                "https://www.youtube.com/embed/3tURaF8PtBU",  
+                "https://www.youtube.com/embed/u60lsp3m7yQ",  
+                "https://www.youtube.com/embed/sV6z3W8xetY",  
+                "https://www.youtube.com/embed/5PVlqx50oLU&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/wUV4CpaS_xw",  
+                "https://www.youtube.com/embed/UwXJ_giypJM",  
+                "https://www.youtube.com/embed/2Dt6lEs9RBM&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/dx0gq0q2PAQ&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/28IMKsgcB5s",  
+                "https://www.youtube.com/embed/Fr5TYvin1FM",  
+                "https://www.youtube.com/embed/Cq_5XA-Pj_4",  
+                "https://www.youtube.com/embed/8Fc7aWmxWZg",  
+                "https://www.youtube.com/embed/LUTSBZ7esnQ&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/4UU77pCBny8",  
+                "https://www.youtube.com/embed/BZ-DQ3cKccs",  
+                "https://www.youtube.com/embed/2dr6PetLtek",  
+                "https://www.youtube.com/embed/pujWlhTzqpM",  
+                "https://www.youtube.com/embed/IY7u_v-sB6Q",  
+                "https://www.youtube.com/embed/4-C36cYQrXY&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/lqmM0M0hZn4&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/uPBsPNiBb5Q",  
+                "https://www.youtube.com/embed/QH-I_rUchNk&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/0HXPryanFV8",  
+                "https://www.youtube.com/embed/fCrOGRWvBh8",  
+                "https://www.youtube.com/embed/AlUuKdETDt4",  
+                "https://www.youtube.com/embed/E1WV0aoTEno",  
+                "https://www.youtube.com/embed/UiTUn56Oe_0&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/hRng2hWvvXE",  
+                "https://www.youtube.com/embed/hHMzM8Qn2n4&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/-t_BnTtvR2Q",  
+                "https://www.youtube.com/embed/mbTToz6rMPM",  
+                "https://www.youtube.com/embed/zVIzckf1qXw",  
+                "https://www.youtube.com/embed/nngHqRN0NZI",  
+                "https://www.youtube.com/embed/N4S4FzTx_sQ",  
+                "https://www.youtube.com/embed/pwbFzUmaDTU",  
+                "https://www.youtube.com/embed/MiF09UPBtVM",  
+                "https://www.youtube.com/embed/vSHk4exP9j4",  
+                "https://www.youtube.com/embed/DR6vEiBQF_U",  
+                "https://www.youtube.com/embed/wyhYqaFLlKM",  
+                "https://www.youtube.com/embed/wX5yWP2tYw8",  
+                "https://www.youtube.com/embed/0akoK00wq_I",  
+                "https://www.youtube.com/embed/dYipJ89SALU",  
+                "https://www.youtube.com/embed/3hLyayzx1qA",  
+                "https://www.youtube.com/embed/ptJxIDJs500",  
+                "https://www.youtube.com/embed/UyKBavJbBqA&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/omlBlPY1iiY",  
+                "https://www.youtube.com/embed/7TXjc5JFg44",  
+                "https://www.youtube.com/embed/Mhz-bnbfZsc",  
+                "https://www.youtube.com/embed/6rUMzovizLs",  
+                "https://www.youtube.com/embed/nKLGs6WR9sY",  
+                "https://www.youtube.com/embed/mBZZqGwdynw",  
+                "https://www.youtube.com/embed/B0zU5ODUhQw",  
+                "https://www.youtube.com/embed/Q4wuo6UkdEQ",  
+                "https://www.youtube.com/embed/bcfr9d12y18",  
+                "https://www.youtube.com/embed/jxOSKS9un3Q",  
+                "https://www.youtube.com/embed/_6NXdwdCeNE",  
+                "https://www.youtube.com/embed/9BPHA0dd5pU",  
+                "https://www.youtube.com/embed/Fkaf6poXtFw",  
+                "https://www.youtube.com/embed/27ca91rgHU4",  
+                "https://www.youtube.com/embed/Mbz0l-QIwqk",  
+                "https://www.youtube.com/embed/vhvoM4r2qdQ",  
+                "https://www.youtube.com/embed/f9l6U-5SPHE&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/cD04ZiMQ73c",  
+                "https://www.youtube.com/embed/ynITP93g2Uw",  
+                "https://www.youtube.com/embed/EXhfbBmlqdo",  
+                "https://www.youtube.com/embed/YHRZE1Xvoxg",  
+                "https://www.youtube.com/embed/4yGVwKC9OUQ",  
+                "https://www.youtube.com/embed/N1z_Vn0YzM8",  
+                "https://www.youtube.com/embed/FtV92Saa9pI",  
+                "https://www.youtube.com/embed/TTYMO-Kj6Fo",  
+                "https://www.youtube.com/embed/hoK6wfWuV5Q",
+                "https://www.youtube.com/embed/kVyqGehtiSI",  
+                "https://www.youtube.com/embed/Rc9m7ceyczU",  
+                "https://www.youtube.com/embed/MILDqwHH5qw",  
+                "https://www.youtube.com/embed/uosXS5-20Rc&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/LTiik6jwHLM",  
+                "https://www.youtube.com/embed/jlkid7kmTug",  
+                "https://www.youtube.com/embed/DIxtAgaOjK8",  
+                "https://www.youtube.com/embed/6pUh8rVgVFM",  
+                "https://www.youtube.com/embed/084GR2nsgSM",  
+                "https://www.youtube.com/embed/m1V0z3WaHK4",  
+                "https://www.youtube.com/embed/24REFWWXmHg",  
+                "https://www.youtube.com/embed/-lFmh8ar3PU",  
+                "https://www.youtube.com/embed/Wyq3hTyPNm0",  
+                "https://www.youtube.com/embed/4bzRy8FOnM0",  
+                "https://www.youtube.com/embed/AxS-pC0CJac",  
+                "https://www.youtube.com/embed/j2vP9cQmoFE",  
+                "https://www.youtube.com/embed/sfXpGNFZa0Y",  
+                "https://www.youtube.com/embed/w54Qu8x-zLg",  
+                "https://www.youtube.com/embed/y5-mSUUjPno",  
+                "https://www.youtube.com/embed/nnqC26tiCJM",  
+                "https://www.youtube.com/embed/vqug8UyURrE",  
+                "https://www.youtube.com/embed/z0VBcqD9eXM",  
+                "https://www.youtube.com/embed/_P9-koX-qgQ",  
+                "https://www.youtube.com/embed/FUf3k6rpifE",  
+                "https://www.youtube.com/embed/-wLkl8XNoh0",  
+                "https://www.youtube.com/embed/F34-kldv7ws&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/9wyG10yfpeU",  
+                "https://www.youtube.com/embed/y0wZj2nDqro",  
+                "https://www.youtube.com/embed/jq6uckUhAVI",  
+                "https://www.youtube.com/embed/IS7oo-7B3HY",  
+                "https://www.youtube.com/embed/M0nyq-HZUg4",  
+                "https://www.youtube.com/embed/HMsf4mlZpgI",  
+                "https://www.youtube.com/embed/XKSzZ_kYFl0",  
+                "https://www.youtube.com/embed/XO4uVRZX4os",  
+                "https://www.youtube.com/embed/lXpDXVcYhzk",  
+                "https://www.youtube.com/embed/2fFnVc_wE28",  
+                "https://www.youtube.com/embed/ISZj7U45VJA",  
+                "https://www.youtube.com/embed/pYWhgPG3F74&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/5G8FgbT3J6Y",  
+                "https://www.youtube.com/embed/nVKfrwRaU-c&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/Rmygu-S-D44",  
+                "https://www.youtube.com/embed/B3P8d60X5Zo",  
+                "https://www.youtube.com/embed/CPdPCHveAn4",  
+                "https://www.youtube.com/embed/OCjoSeu48J4",  
+                "https://www.youtube.com/embed/Sv6SduQeln4",  
+                "https://www.youtube.com/embed/tZt_v8BMits",  
+                "https://www.youtube.com/embed/6b-zbKeorXA",  
+                "https://www.youtube.com/embed/xkFbaif29AY",  
+                "https://www.youtube.com/embed/J-CtaIlFxJk",  
+                "https://www.youtube.com/embed/zidSFEWpfbE",  
+                "https://www.youtube.com/embed/zgdzki69Ghg",  
+                "https://www.youtube.com/embed/M-ySvKjm_cQ",  
+                "https://www.youtube.com/embed/3mIvZEsnjFI",  
+                "https://www.youtube.com/embed/2xGUEPXhzqg",  
+                "https://www.youtube.com/embed/ORN1eiX0L1s",  
+                "https://www.youtube.com/embed/aZVVcXD_EjQ",  
+                "https://www.youtube.com/embed/qZ-UblMJJyc",  
+                "https://www.youtube.com/embed/ZgkHJL54VTs",  
+                "https://www.youtube.com/embed/KmXoxTcS1Zs",  
+                "https://www.youtube.com/embed/OfCcWPHhCcY",  
+                "https://www.youtube.com/embed/HOazVOau5YA",  
+                "https://www.youtube.com/embed/Jr0-TzB0iYM",  
+                "https://www.youtube.com/embed/8wRq3It4rQw",  
+                "https://www.youtube.com/embed/yE_Vl8pjRK0",  
+                "https://www.youtube.com/embed/WJ5oF6nnOEw",  
+                "https://www.youtube.com/embed/p6BW8gU1ZI0",  
+                "https://www.youtube.com/embed/Rp6wmK5YuX4",  
+                "https://www.youtube.com/embed/D6jVvZA-S0M&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/sXs5Qq2H5xs",  
+                "https://www.youtube.com/embed/MzVsU5V4pWo",  
+                "https://www.youtube.com/embed/apvak92Og3A",  
+                "https://www.youtube.com/embed/VHTmrrcl7y8",  
+                "https://www.youtube.com/embed/OmPBioRbdAw",  
+                "https://www.youtube.com/embed/wAHNjdEcXZ0",  
+                "https://www.youtube.com/embed/D196HRjDWsY",  
+                "https://www.youtube.com/embed/7aw4D5Rjicc",  
+                "https://www.youtube.com/embed/8R_ZvlJiSgU",  
+                "https://www.youtube.com/embed/OrGArYR9BmI",  
+                "https://www.youtube.com/embed/XAOxB35nQjo",  
+                "https://www.youtube.com/embed/MPgU0jh4XLE",  
+                "https://www.youtube.com/embed/B5TGbd6b-rw",  
+                "https://www.youtube.com/embed/rBRNwR_qHoE",  
+                "https://www.youtube.com/embed/bZmFmvBMj2g",  
+                "https://www.youtube.com/embed/a9Xh4mpZWkY",  
+                "https://www.youtube.com/embed/tYWvUs_Vlzw&pp=0gcJCcwJAYcqIYzv",  
+                "https://www.youtube.com/embed/igjTsw8J_o8",  
+                "https://www.youtube.com/embed/JVaLJvmP1Jk",  
+                "https://www.youtube.com/embed/erug1iDNUps",
+               
+            ];
+            let index=0;
+            let pular=0;
+            let limiteindex=1;
+            let botao=document.getElementById('btn');
+            let video=document.getElementById('videos');
+            function inserir(){
+                let fim=index+limiteindex;
+                for(;index<fim && index<links.length;index++){
+                    let iframe=document.createElement('iframe');
+                    iframe.src=links[index];
+                    iframe.frameBorder='0';
+                    video.appendChild(iframe); // Adiciona o iframe
+                    pular++;     
+                    if(pular==2) {
+                        const propaganda2=document.createElement('p');
+                        propaganda2.innerHTML=`<a href="https://geocredibnkvitoria.com/"> ESTÁ PRECISANDO DE ->CRÉDITO PESSOAL</a>`;
+                        videos.appendChild(propaganda2);
+                    }  
+                    if(pular==3){
+                        const propaganda2=document.createElement('p');
+                        propaganda2.innerHTML=`<a href="https://victorxx.github.io/VPSVENDA/contatoroberto.html"> SEGUROS E ETC.....</a>`;
+                        videos.appendChild(propaganda2);
+
+                    }           // Conta mais um
+
+                    if (pular === 5) {
+                            const pularLinha = document.createElement('br');
+                            const propaganda=document.createElement('p');
+                            propaganda.innerHTML=`<a href="https://victorxx.github.io/redirecionae00/">CONFERIR A OPORTUNIDADE</a>`;
+                            video.appendChild(pularLinha);
+                            videos.appendChild(propaganda); // Adiciona quebra de linha
+                            pular = 0; // Reseta o contador e volta ao normal
+                        }
+                    if(pular===4){
+                         const propaganda2=document.createElement('p');
+                        propaganda2.innerHTML=`<a href="https://victorxx.github.io/topicogithub01/randomizador.html"> CONFIRA A OPORTUNIDADE.....</a>`;
+                        videos.appendChild(propaganda2);
+
+                    }
+                    
+
+                   
+                }
+                if(index>=links.length){
+                    botao.disabled=true;
+                    botao.textContent='chegou no limite';
+                }
+            }
+            botao.addEventListener('click',inserir);
+        </script>
+    </body>
+</html>
